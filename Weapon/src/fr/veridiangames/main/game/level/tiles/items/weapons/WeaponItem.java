@@ -1,0 +1,30 @@
+package fr.veridiangames.main.game.level.tiles.items.weapons;
+
+import fr.veridiangames.main.game.Game;
+import fr.veridiangames.main.game.entities.Player;
+import fr.veridiangames.main.game.entities.weapons.Weapon;
+import fr.veridiangames.main.game.level.tiles.items.Item;
+
+public abstract class WeaponItem extends Item {
+	protected Weapon weapon;
+	
+	public WeaponItem(float x, float y) {
+		super(x, y);
+	}
+	
+	int time = (int) (Math.random() * 360);
+	public void update() {
+		if (removed) return;
+		time++;
+		
+		h = (float) Math.sin(time * 0.1f) * 0.1f;
+		
+		Player player = Game.getGame().getPlayer();
+		
+		if (player.x > x + 0.2f && player.y > y + 0.8f && player.x < x + 0.8f && player.y < y + 1.4f) {
+			player.add(weapon);
+			removed = true;
+		}
+	}
+
+}

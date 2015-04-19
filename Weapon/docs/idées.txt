@@ -1,0 +1,31 @@
+
+-----------------------------------------
+	THEME: An Unconventional Weapon
+-----------------------------------------
+
+Une arme différente de la normale ?
+
+Une arme qui n'est pas une arme ? (Nourriture, objets...)
+
+Qu'est ce qu'une arme ?
+	-> Un moyen de déffence ?
+	-> Un moyen d'attaque ?
+
+
+Idées de jeu: 
+
+	- Un tower deffence avec de la nourriture comme arme ?
+		-> Les armes sont de la nourriture ?
+		
+	- Un combat dans la rue avec des objet de rue comme arme ?
+		-> Poubelle, sac poubelle, chaussure, chiens, petites vielles.. comme arme ?
+		-> Jeu par vague d'énemies ?
+	
+	- Trouver l'arme peu conventionnelle ?
+		-> 
+	
+	//---------------- CHOIX !!!
+	- Fabriquer son arme au fill du jeu ?
+		-> On commence avec rien, on trouve les objets au fill du jeu en fonction de ce que le joueur trouve?
+		-> 
+		-> 3D platformer
