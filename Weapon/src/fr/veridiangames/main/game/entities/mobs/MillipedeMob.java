@@ -2,6 +2,7 @@ package fr.veridiangames.main.game.entities.mobs;
 
 import java.util.Random;
 
+import fr.veridiangames.main.game.Game;
 import fr.veridiangames.main.game.entities.Entity;
 import fr.veridiangames.main.game.entities.Player;
 
@@ -13,7 +14,7 @@ public class MillipedeMob extends Mob {
 	public MillipedeMob(float x, float y) {
 		super(x, y);
 		tex = 16 + 8;
-		life = 10;
+		life = 3 * Game.difficulty;
 	}
 	int time = 0;
 	int counter = 0;

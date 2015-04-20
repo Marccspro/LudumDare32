@@ -21,7 +21,7 @@ public class KeyItem extends Item {
 		if (!removed) {
 			Player p = Game.getGame().getPlayer();
 			
-			if (p.x > x && p.y > y && p.x < x + 1 && p.y < y + 1) {
+			if (p.x > x - 0.5f && p.y > y - 0.5f && p.x < x + 1.5f && p.y < y + 1.5f) {
 				p.addKey(code);
 				Main.getMain().playSound(Audio.KEY_PICKUP);
 				removed = true;

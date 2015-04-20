@@ -5,6 +5,8 @@ import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
+import fr.veridiangames.main.Input;
+
 public class Gui {
 	
 	private static Texture font = new Texture("font.png");
@@ -90,10 +92,9 @@ public class Gui {
 		Gui.color(0.5f, 0.5f, 0.5f, 1);
 		if (mx > x - w/2 && my > y - 16 && mx < x + w/2 && my < y + 16) {
 			Gui.color(1, 0, 0, 1);
-			while (Mouse.next()) {
-				if (Mouse.isButtonDown(0)) {
-					return true;
-				}
+
+			if (Input.r.getMouseDown(0)) {
+				return true;
 			}
 		}
 		
@@ -113,10 +114,9 @@ public class Gui {
 		Gui.color(0.5f, 0.5f, 0.5f, 1);
 		if (mx > x - w/2 && my > y - 16 && mx < x + w/2 && my < y + 16) {
 			Gui.color(1, 0, 0, 1);
-			while (Mouse.next()) {
-				if (Mouse.isButtonDown(0)) {
-					return true;
-				}
+			
+			if (Input.r.getMouseDown(0)) {
+				return true;
 			}
 		}
 		

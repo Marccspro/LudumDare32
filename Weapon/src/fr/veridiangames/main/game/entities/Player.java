@@ -6,10 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
-import fr.veridiangames.main.Input;
 import fr.veridiangames.main.Main;
 import fr.veridiangames.main.audio.Audio;
 import fr.veridiangames.main.game.Game;
@@ -58,7 +56,31 @@ public class Player extends Entity {
 	boolean throwP = false;
 	int throwTimer = 0;
 	
+	boolean canUpdate = false;
+	
 	public void update() {
+		if (Game.getGame().levelChange) {
+			canUpdate = false;
+			System.out.println("LOL");
+		}
+		if (!canUpdate) {
+			if (Keyboard.isKeyDown(Keyboard.KEY_Z) || Keyboard.isKeyDown(Keyboard.KEY_Q) || Keyboard.isKeyDown(Keyboard.KEY_S) || Keyboard.isKeyDown(Keyboard.KEY_D) ||
+					Keyboard.isKeyDown(Keyboard.KEY_A) || Keyboard.isKeyDown(Keyboard.KEY_W) || Keyboard.isKeyDown(Keyboard.KEY_UP) || Keyboard.isKeyDown(Keyboard.KEY_LEFT) ||
+					Keyboard.isKeyDown(Keyboard.KEY_RIGHT) || Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+				//System.out.println("LOL");
+			}else {
+				Game.getGame().levelChange = false;
+				canUpdate = true;
+			}
+		}
+		
+		if (!canUpdate) {
+			animTimer = 0;
+			xa = 0;
+			ya = 0;
+			return;
+		}
+		
 		animTimer++;
 		if (attack) attack = false;
 		boolean moving = false;

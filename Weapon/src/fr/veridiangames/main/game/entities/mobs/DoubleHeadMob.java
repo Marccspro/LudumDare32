@@ -2,6 +2,7 @@ package fr.veridiangames.main.game.entities.mobs;
 
 import java.util.Random;
 
+import fr.veridiangames.main.game.Game;
 import fr.veridiangames.main.game.entities.Entity;
 import fr.veridiangames.main.game.entities.Player;
 
@@ -15,7 +16,7 @@ public class DoubleHeadMob extends Mob {
 	public DoubleHeadMob(float x, float y) {
 		super(x, y);
 		tex = 5 * 8;
-		life = 50;
+		life = 10 * Game.difficulty;
 	}
 	int time = 0;
 	int counter = 0;

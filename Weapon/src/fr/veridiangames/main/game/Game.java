@@ -15,16 +15,21 @@ import fr.veridiangames.main.ViewState;
 import fr.veridiangames.main.audio.Audio;
 import fr.veridiangames.main.game.entities.Player;
 import fr.veridiangames.main.game.level.Level;
+import fr.veridiangames.main.menu.Menu;
 import fr.veridiangames.main.rendering.Gui;
 import fr.veridiangames.main.rendering.Texture;
 
 public class Game extends ViewState{
+	
+	public static int difficulty = 2;
+	
 	public HashMap<String, Level> levelCache = new HashMap<String, Level>();
 	private static Game game;
 	
 	public static boolean paused = false;
 	public static boolean finished = false;
-	public boolean changingLevel = false; 
+	public boolean changingLevel = false;
+	public boolean levelChange = false;
 	
 	Level level;
 	Player player;
@@ -82,7 +87,7 @@ public class Game extends ViewState{
 			Gui.drawQuad(0, 0, Display.getWidth(), Display.getHeight());
 			Gui.color(1, 1, 1, 1);
 			Gui.drawString("Game paused !", Display.getWidth() / 2, Display.getHeight() / 2 - 200, 48, true);
-			if (Gui.button("Restart", Display.getWidth() / 2, Display.getHeight() / 2, 300)) {
+			if (Gui.button("Restart", Display.getWidth() / 2, Display.getHeight() / 2 + 80, 300)) {
 				paused = false;
 				restart();
 			}
@@ -90,8 +95,18 @@ public class Game extends ViewState{
 				restart();
 				GameState.setState(State.IN_MENU);
 			}
-			if (Gui.button("Resume", Display.getWidth() / 2, Display.getHeight() / 2 + 80, 300)) {
+			if (Gui.button("Resume", Display.getWidth() / 2, Display.getHeight() / 2, 300)) {
 				paused = false;
+			}
+			if (Gui.button("Options", Display.getWidth() / 2, Display.getHeight() / 2 + 80 * 2, 300)) {
+				paused = true;
+				GameState.setState(State.IN_MENU);
+				Menu.option = true;
+			}
+			if (Gui.button("Instructions", Display.getWidth() / 2, Display.getHeight() / 2 + 80 * 3, 300)) {
+				paused = true;
+				GameState.setState(State.IN_MENU);
+				Menu.instruction = true;
 			}
 		}
 		if (finished) {
@@ -127,6 +142,7 @@ public class Game extends ViewState{
 	public void loadLevel(String level) {
 		if (!changingLevel) {
 			changingLevel = true;
+			levelChange = true;
 			Main.getMain().playSound(Audio.LEVEL_CHANGE);
 			if (levelCache.containsKey(level)) {
 				this.level = levelCache.get(level);

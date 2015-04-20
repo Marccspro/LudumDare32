@@ -29,6 +29,8 @@ public class Main {
 
 	private AudioManager audioManager;
 
+	public static boolean showFPS = true;
+	
 	public Main() {
 		main = this;
 		
@@ -47,7 +49,9 @@ public class Main {
 
 	public void renderGUI() {
 		GameState.renderGUI();
-		Gui.drawString(FPS + " FPS", 5, 5, 16);
+		if (showFPS) {
+			Gui.drawString(FPS + " FPS", 5, 5, 16);			
+		}
 	}
 
 	// ---

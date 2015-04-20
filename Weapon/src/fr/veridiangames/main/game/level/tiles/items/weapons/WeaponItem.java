@@ -21,7 +21,7 @@ public abstract class WeaponItem extends Item {
 		
 		Player player = Game.getGame().getPlayer();
 		
-		if (player.x > x + 0.2f && player.y > y + 0.8f && player.x < x + 0.8f && player.y < y + 1.4f) {
+		if (player.x > x - 0.5f && player.y > y - 0.5f && player.x < x + 1.5f && player.y < y + 1.5f) {
 			player.add(weapon);
 			removed = true;
 		}

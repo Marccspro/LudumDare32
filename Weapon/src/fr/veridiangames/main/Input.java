@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 
 public class Input {
 	
@@ -12,6 +13,9 @@ public class Input {
 	
 	private static List<Integer> keys = new ArrayList<Integer>();
 	private static List<Integer> keysDown = new ArrayList<Integer>();
+	
+	private static List<Integer> buttons = new ArrayList<Integer>();
+	private static List<Integer> buttonsDown = new ArrayList<Integer>();
 	
 	public void update() {
 		keysDown.clear();
@@ -29,6 +33,22 @@ public class Input {
 				keys.add(i);
 			}
 		}
+		
+		buttonsDown.clear();
+		
+		for (int i = 0; i < 5; i++) {
+			if (getMouse(i) && !buttons.contains(i)) {
+				buttonsDown.add(i);
+			}
+		}
+		
+		buttons.clear();
+		
+		for (int i = 0; i < 5; i++) {
+			if (getMouse(i)) {
+				buttons.add(i);
+			}
+		}
 	}
 	
 	public boolean getKeyDown(int key) {
@@ -37,5 +57,13 @@ public class Input {
 	
 	public boolean getKey(int key) {
 		return Keyboard.isKeyDown(key);
+	}
+	
+	public boolean getMouseDown(int m) {
+		return buttonsDown.contains(m);
+	}
+	
+	public boolean getMouse(int m) {
+		return Mouse.isButtonDown(m);
 	}
 }

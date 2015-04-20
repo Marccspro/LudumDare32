@@ -48,7 +48,7 @@ public class EntityManager {
 						if (Math.random() > 0.5f)
 							Game.getGame().getLevel().items.add(new ChikenItem(e.x - 0.5f, e.y - 0.5f));
 					}else if (e instanceof BossMob) {
-						Game.getGame().getLevel().items.add(new KeyItem(e.x - 0.5f, e.y - 0.5f, 0xff500000));
+						Game.getGame().getLevel().items.add(new KeyItem(e.x - 0.5f, e.y - 0.5f, 0xff900000));
 					}
 					
 					entities.remove(e);

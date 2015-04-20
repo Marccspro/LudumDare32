@@ -2,6 +2,7 @@ package fr.veridiangames.main.game.entities.mobs;
 
 import java.util.Random;
 
+import fr.veridiangames.main.game.Game;
 import fr.veridiangames.main.game.entities.Entity;
 import fr.veridiangames.main.game.entities.Player;
 
@@ -13,7 +14,7 @@ public class Weird1Mob extends Mob{
 	public Weird1Mob(float x, float y) {
 		super(x, y);
 		tex = 24 + 8;
-		life = 20;
+		life = 7 * Game.difficulty;
 	}
 	int time = 0;
 	int counter = 0;

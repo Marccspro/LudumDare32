@@ -20,7 +20,7 @@ public class BossMob extends Mob {
 	public BossMob(float x, float y) {
 		super(x, y);
 		tex = 25;
-		life = 300; // BONNE CHANCE POUR LE TUER ! Heu 5 coups en fait ^^
+		life = 100 * Game.difficulty; // BONNE CHANCE POUR LE TUER ! Heu 5 coups en fait ^^
 	}
 	int time = 0;
 	int counter = 0;

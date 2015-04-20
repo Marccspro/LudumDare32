@@ -8,13 +8,14 @@ import fr.veridiangames.main.GameState;
 import fr.veridiangames.main.GameState.State;
 import fr.veridiangames.main.Main;
 import fr.veridiangames.main.ViewState;
+import fr.veridiangames.main.game.Game;
 import fr.veridiangames.main.rendering.Gui;
 import fr.veridiangames.main.rendering.Texture;
 
 public class Menu extends ViewState{
-	boolean instruction = false;
-	boolean option = false;
-	boolean about = false;
+	public static boolean instruction = false;
+	public static boolean option = false;
+	public static boolean about = false;
 	
 	public Menu() {
 
@@ -53,9 +54,13 @@ public class Menu extends ViewState{
 		
 		Gui.drawString(Main.NAME, Display.getWidth() / 2, Display.getHeight() / 2 - 250, 48, true);
 		if (Gui.button("PLAY", Display.getWidth() / 2, Display.getHeight() / 2, 300)) {
-			instruction = true;
-			about = false;
-			option = false;
+			if (Game.paused) {
+				GameState.setState(State.IN_GAME);
+			}else {
+				instruction = true;
+				about = false;
+				option = false;
+			}
 		}
 		if (Gui.button("OPTIONS", Display.getWidth() / 2, Display.getHeight() / 2 + 44, 300)) {
 			option = true;
@@ -74,33 +79,68 @@ public class Menu extends ViewState{
 	
 	public void renderInstrcution() {
 		Gui.drawString("-ZQSD- or -WASD- or Arrows to move", Display.getWidth() / 2, Display.getHeight() / 2 - 300, 32, true);
-		Gui.drawString("Press -E- to open inventory", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 64, 32, true);
-		Gui.drawString("Press -G- to throw a potato grenade", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 64 * 2, 32, true);
+		Gui.drawString("-SPACE- to attack and -E- to open inventory", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 64, 32, true);
+		Gui.drawString("-G- to throw a potato grenade", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 64 * 2, 32, true);
 		
 		Gui.drawString("What the game is about:", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 64 * 4, 32, true);
-		Gui.drawString("You have to collect as many", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 64 * 5, 16, true);
-		Gui.drawString("potatoes as you can !", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 58 * 6, 16, true);
+		Gui.drawString("You have to collect as many potatoes as you can !", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 64 * 5, 16, true);
 		Gui.color(0, 1, 1, 1);
-		Gui.drawString("NOTE:  Craft a weapon as soon as you can are you will die ;)", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 55 * 7, 16, true, true);
+		Gui.drawString("NOTES:  Craft a weapon as soon as you can are you will die ;)", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 52 * 7, 16, true, true);
+		Gui.drawString("Throwing a potato can save your life, but you need them", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 56 * 7, 16, true, true);
+		Gui.drawString("Watch out when your in narrow tunnels as things can hirt you ;)", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 60 * 7, 16, true, true);
 		Gui.color(1, 0, 0, 1);
 		Gui.drawString("disclaimer", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 64 * 8, 32, true, true);
 		Gui.drawString("The game may containe bugs or glitches, not that it was made in 48 hours ;)", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 63 * 9, 16, true, true);
 		Gui.color(1, 1, 1, 1);
-		if (Gui.button("Start", Display.getWidth() - 150, Display.getHeight() - 50, 200)) {
-			instruction = false;
-			GameState.setState(State.IN_GAME);
-		}
-		if (Gui.button("Back", 150, Display.getHeight() - 50, 200)) {
-			instruction = false;
-			about = false;
+		if (Game.paused) {
+			if (Gui.button("Resume", Display.getWidth() - 150, Display.getHeight() - 50, 200)) {
+				instruction = false;
+				GameState.setState(State.IN_GAME);
+			}
+			if (Gui.button("Menu", 150, Display.getHeight() - 50, 200)) {
+				instruction = false;
+				about = false;
+			}
+		}else {
+			if (Gui.button("Start", Display.getWidth() - 150, Display.getHeight() - 50, 200)) {
+				instruction = false;
+				GameState.setState(State.IN_GAME);
+			}			
+			if (Gui.button("Back", 150, Display.getHeight() - 50, 200)) {
+				instruction = false;
+				about = false;
+			}
 		}
 	}
 	
 	public void renderOption() {
-		Gui.drawString("There is no options :S Let me know", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 64 * 4, 32, true);
-		Gui.drawString("if you have one to add ;)", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 64 * 5, 32, true);
-		if (Gui.button("Back", 150, Display.getHeight() - 50, 200)) {
-			option = false;
+		//Gui.drawString("There is no options :S Let me know", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 64 * 4, 32, true);
+		//Gui.drawString("if you have one to add ;)", Display.getWidth() / 2, Display.getHeight() / 2 - 300 + 64 * 5, 32, true);
+		if (Gui.button("Toggle FPS debug: " + Main.showFPS, Display.getWidth() / 2, Display.getHeight() / 2 - 200, 550, true)) {
+			Main.showFPS = !Main.showFPS;
+		}
+		
+		Gui.drawString("Chose difficulty: " + (Game.difficulty == 3 ? "HARD" : (Game.difficulty == 2 ? "MEDIUM" : (Game.difficulty == 1 ? "EASY" : ""))), Display.getWidth() / 2, Display.getHeight() / 2 - 50, 32, true);
+		
+		if (Gui.button("Easy", Display.getWidth() / 2 - 200, Display.getHeight() / 2 + 50, 150, true)) {
+			Game.difficulty = 1;
+		}
+		if (Gui.button("Medium", Display.getWidth() / 2, Display.getHeight() / 2 + 50, 150, true)) {
+			Game.difficulty = 2;
+		}
+		if (Gui.button("Hard", Display.getWidth() / 2 + 200, Display.getHeight() / 2 + 50, 150, true)) {
+			Game.difficulty = 3;
+		}
+		
+		if (Game.paused) {
+			if (Gui.button("Resume", 150, Display.getHeight() - 50, 200)) {
+				option = false;
+				GameState.setState(State.IN_GAME);
+			}
+		}else {
+			if (Gui.button("Back", 150, Display.getHeight() - 50, 200)) {
+				option = false;
+			}			
 		}
 	}
 	
